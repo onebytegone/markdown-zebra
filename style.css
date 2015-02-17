@@ -1,0 +1,28 @@
+/**
+ * markdown-zebra v0.1
+ * style.css
+ *
+ * Copyright 2015 Ethan Smith
+ * Licensed under the MIT license.
+ *
+ */
+
+html {
+   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+   background-color: #263238;
+   color: #ECEFF1;
+   padding: 24px;
+}
+
+h1, h2, h3, h4 {
+   font-weight: normal;
+}
+
+code {
+   display: block;
+   border-radius: 4px;
+   padding: 12px;
+   background-color: #ECEFF1;
+   color: #455A64;
+   margin-bottom: 6px;
+}

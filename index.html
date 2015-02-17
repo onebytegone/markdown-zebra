@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title></title>
+   <link rel="stylesheet" type="text/css" href="style.css">
+   <script type="text/javascript" src="thirdparty/underscore-min.js"></script>
+   <script type="text/javascript" src="thirdparty/jquery-1.11.2.min.js"></script>
+   <script type="text/javascript" src="markdown-zebra.js"></script>
+</head>
+<body>
+
+   <h1>markdown-zebra</h1>
+
+   <h2>Examples</h2>
+
+
+   <h3>Creation of markdown table from object</h3>
+   <code id="dataCreate"></code>
+
+   <script type="text/javascript">
+      var tableStr = zebra.createMarkdownTable([[1,3,5], [132,32,2]], 10);
+      $('#dataCreate').html(zebra.replaceNewlinesForOutput(tableStr));
+   </script>
+
+
+   <h3>Clean up of existing markdown table</h3>
+   <code id="stringTidy"></code>
+
+   <script type="text/javascript">
+      $('#stringTidy').html(zebra.tidyUpTable('|1| 22   | 2|\n|2 asdf|32| 2|', [10,2,4]));
+   </script>
+
+</body>
+</html>
