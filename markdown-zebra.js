@@ -71,8 +71,11 @@
 
    zebra.createMarkdownTable = function(tableRows, tableHeader, preferredColWidths) {
       if (preferredColWidths == null) {
-         // TODO: this would be nice to have auto calculate based on width of the contents.
-         preferredColWidths = 20;
+         var allRows = tableRows;
+         if (tableHeader) {
+            allRows = allRows.concat(tableHeader);
+         }
+         preferredColWidths = zebra.findMaxRowWidths(allRows);
       }
 
       if (!(preferredColWidths instanceof Array)) {
@@ -131,5 +134,13 @@
       var data = zebra.parseMarkdownTable(tableStr);
       var table = zebra.createMarkdownTable(data.rows, data.header, preferredColWidths);
       return zebra.replaceNewlinesForOutput(table);
+   };
+
+   zebra.findMaxRowWidths = function(rows) {
+      return _.reduce(rows, function (widths, row) {
+         return _.map(_.keys(widths), function (key) {
+            return Math.max(widths[key], String(row[key]).length);
+         });
+      }, _.range(rows[0].length).map( function () { return 1; }));
    };
 }.call(this));
