@@ -11,6 +11,11 @@
 
    <h1>markdown-zebra</h1>
 
+   <h2>Demos</h2>
+   <ul>
+      <li><a href="table-formatter.html">Table Formatting</a></li>
+   </ul>
+
    <h2>Examples</h2>
 
 
@@ -18,7 +23,7 @@
    <code id="dataCreate"></code>
 
    <script type="text/javascript">
-      var tableStr = zebra.createMarkdownTable([[1,3,5], [132,32,2]], 10);
+      var tableStr = zebra.createMarkdownTable([[1,3,5], [132,32,2]]);
       $('#dataCreate').html(zebra.replaceNewlinesForOutput(tableStr));
    </script>
 

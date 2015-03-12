@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Table formatter demo - markdown-zebra</title>
+   <link rel="stylesheet" type="text/css" href="style.css">
+   <script type="text/javascript" src="thirdparty/underscore-min.js"></script>
+   <script type="text/javascript" src="thirdparty/jquery-1.11.2.min.js"></script>
+   <script type="text/javascript" src="markdown-zebra.js"></script>
+</head>
+<body>
+
+   <h1>markdown-zebra - Table formatter demo</h1>
+
+   <h3>Input</h3>
+   <form id="userDemo">
+      <textarea id="userData"></textarea>
+      <button type="submit">Reformat</button>
+   </form>
+   <h3>Output</h3>
+   <code id="userOutput"></code>
+
+   <script type="text/javascript">
+      $("#userDemo").submit(function(e){
+         e.preventDefault();
+         console.log($('#userData').val());
+         $('#userOutput').html(zebra.tidyUpTable($('#userData').val()));
+      });
+   </script>
+</body>
+</html>

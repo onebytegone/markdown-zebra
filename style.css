@@ -18,6 +18,10 @@ h1, h2, h3, h4 {
    font-weight: normal;
 }
 
+a {
+   color: #BBDEFB;
+}
+
 code {
    display: block;
    border-radius: 4px;
@@ -25,4 +29,30 @@ code {
    background-color: #ECEFF1;
    color: #455A64;
    margin-bottom: 6px;
+   font-size: 14px;
+}
+
+textarea {
+   width: 100%;
+   box-sizing: border-box;
+   display: block;
+   border-radius: 4px;
+   padding: 12px;
+   background-color: #ECEFF1;
+   color: #455A64;
+   margin-bottom: 6px;
+   font-family: monospace;
+   font-size: 14px;
+   min-height: 300px;
+}
+
+button {
+   width: 100%;
+   display: block;
+   border-radius: 4px;
+   padding: 12px;
+   background-color: #78909C;
+   color: #ECEFF1;
+   border: 0;
+   font-size: 14px;
 }
