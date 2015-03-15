@@ -22,8 +22,7 @@
    <script type="text/javascript">
       $("#userDemo").submit(function(e){
          e.preventDefault();
-         console.log($('#userData').val());
-         $('#userOutput').html(zebra.tidyUpTable($('#userData').val()));
+         $('#userOutput').html(zebra.tidyUpTable($('#userData').val().replace(/(\r\n|\n|\r)/g,"<br />")));
       });
    </script>
 </body>
