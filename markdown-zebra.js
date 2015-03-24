@@ -71,9 +71,9 @@
 
    zebra.createMarkdownTable = function(tableRows, tableHeader, preferredColWidths) {
       if (preferredColWidths == null) {
-         var allRows = tableRows;
+         var allRows = tableRows.slice(0);
          if (tableHeader) {
-            allRows = allRows.concat(tableHeader);
+            allRows.unshift(tableHeader);
          }
          preferredColWidths = zebra.findMaxRowWidths(allRows);
       }
@@ -85,8 +85,8 @@
       var tableStr = '';
 
       if (tableHeader) {
-         tableStr += zebra.formatRow(tableHeader, preferredColWidths);
-         tableStr += zebra.generateHeaderDivider(preferredColWidths);
+         tableStr += zebra.formatRow(tableHeader, preferredColWidths.slice(0));
+         tableStr += zebra.generateHeaderDivider(preferredColWidths.slice(0));
       }
 
       tableStr += _.reduce(tableRows, function(output, row) {
@@ -94,7 +94,7 @@
          return output + zebra.formatRow(row, rowWidths);
       }, '');
 
-      return tableStr;
+      return tableStr.replace(/^\s+|\s+$/g, '');
    };
 
    zebra.formatRow = function(items, widths) {
@@ -107,8 +107,8 @@
    };
 
    zebra.generateHeaderDivider = function(widths) {
-      var cols = _.reduce(widths, function(output, width) {
-         return output + zebra.createColumnFill(zebra.config.headerDividerFill, width);
+      var cols = _.map(widths, function(width) {
+         return zebra.createColumnFill(zebra.config.headerDividerFill, width);
       }, '');
 
       return zebra.formatRow(cols, widths);
@@ -118,12 +118,11 @@
       return zebra.config.columnDelimiter +
          zebra.config.columnPadding +
          value +
-         zebra.createColumnFill(zebra.config.columnFill, Math.max(width - value.toString().length, 0)) +
-         zebra.config.columnPadding;
+         zebra.createColumnFill(zebra.config.columnFill, Math.max(width - value.toString().length, 0)) ;
    };
 
    zebra.createColumnFill = function(fill, width) {
-      return Array(width).join(fill);
+      return Array(width+1).join(fill);
    };
 
    zebra.replaceNewlinesForOutput = function(str) {
