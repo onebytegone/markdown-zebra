@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>markdown-zebra - A web based table formatter for markdown</title>
+   <link rel="stylesheet" type="text/css" href="style.css">
+   <script type="text/javascript" src="thirdparty/underscore-min.js"></script>
+   <script type="text/javascript" src="thirdparty/jquery-1.11.2.min.js"></script>
+   <script type="text/javascript" src="markdown-zebra.js"></script>
+
+   <script type="text/javascript">
+      var assertEquals = function(name, a, b) {
+         if (a === b) {
+            console.log(name+': pass');
+         }else {
+            console.log(name+': FAILED!!!');
+            console.log('Expected:');
+            console.log(a);
+            console.log('Actual:');
+            console.log(b);
+         }
+
+         var node = $("<div>");
+
+         var header = $('<h3>');
+         header.html(name + ' - ' + (a === b ? 'pass' : 'FAILED' ) );
+         node.append(header);
+
+         var codeA = $('<code>');
+         codeA.html(a.replace(/(\r\n|\n|\r)/g,"<br />"));
+         node.append(codeA);
+
+         var codeB = $('<code>');
+         codeB.html(b.replace(/(\r\n|\n|\r)/g,"<br />"));
+         node.append(codeB);
+
+         $('#testOutput').append(node);
+      };
+   </script>
+</head>
+<body>
+
+   <h1>markdown-zebra tests</h1>
+   <p>This isn't the nicest way of doing tests, but it works for now.</p>
+
+   <div id="testOutput"></div>
+
+   <script type="text/javascript">
+      var tableStr;
+      var expected;
+
+      tableStr = zebra.createMarkdownTable([[1,3,5], [132,32,2]]);
+      expected = "|&nbsp;1&nbsp;&nbsp;&nbsp;|&nbsp;3&nbsp;&nbsp;|&nbsp;5&nbsp;|\n|&nbsp;132&nbsp;|&nbsp;32&nbsp;|&nbsp;2&nbsp;|";
+      assertEquals('data test', expected, tableStr);
+
+      tableStr = zebra.createMarkdownTable([[1,3,5], [132,32,2]], [5,5,5]);
+      expected = "|&nbsp;5&nbsp;&nbsp;&nbsp;|&nbsp;5&nbsp;&nbsp;|&nbsp;5&nbsp;|\n|&nbsp;---&nbsp;|&nbsp;--&nbsp;|&nbsp;-&nbsp;|\n|&nbsp;1&nbsp;&nbsp;&nbsp;|&nbsp;3&nbsp;&nbsp;|&nbsp;5&nbsp;|\n|&nbsp;132&nbsp;|&nbsp;32&nbsp;|&nbsp;2&nbsp;|";
+      assertEquals('with header', expected, tableStr);
+
+      tableStr = zebra.tidyUpTable('|1| 22   | 2|\n|--|---|---|\n|2 asdf|32| 2|');
+      expected = "|&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;22&nbsp;|&nbsp;2&nbsp;|<br>|&nbsp;------&nbsp;|&nbsp;--&nbsp;|&nbsp;-&nbsp;|\n|&nbsp;2 asdf&nbsp;|&nbsp;32&nbsp;|&nbsp;2&nbsp;|";
+      assertEquals('with header from str', expected, tableStr);
+
+      tableStr = zebra.tidyUpTable('|1| 22   | 2|\n|2 asdf|32| 2|');
+      expected = "|&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;22&nbsp;|&nbsp;2&nbsp;|<br>|&nbsp;2 asdf&nbsp;|&nbsp;32&nbsp;|&nbsp;2&nbsp;|";
+      assertEquals('with header from str', expected, tableStr);
+   </script>
+
+
+</body>
+</html>
