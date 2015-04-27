@@ -8,6 +8,8 @@
  *  underscore.js - (http://underscorejs.org)
  */
 
+var _ = require("underscore");
+
 ;(function() {
    // Store the base object
    var root = this;

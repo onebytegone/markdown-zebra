@@ -1,0 +1,26 @@
+{
+  "name": "markdown-zebra",
+  "version": "0.0.1",
+  "description": "A markdown formatter",
+  "main": "markdown-zebra.js",
+  "scripts": {
+    "test": "mocha ./tests/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/onebytegone/markdown-zebra.git"
+  },
+  "author": "Ethan Smith",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/onebytegone/markdown-zebra/issues"
+  },
+  "homepage": "https://onebytegone.github.io/markdown-zebra",
+  "dependencies": {
+    "underscore": "^1.8.2"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^2.2.1"
+  }
+}
